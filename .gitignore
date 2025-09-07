@@ -1,0 +1,24 @@
+# Node.js
+/node_modules
+
+# Logs
+/npm-debug.log*
+/.npm/
+/.nvm/
+/.pnpm-debug.log*
+/yarn-debug.log*
+/yarn-error.log*
+
+# Production
+/dist/
+/build/
+
+# Visual Studio Code
+/.vscode/
+
+# JetBrains (IntelliJ, WebStorm, etc.)
+/.idea/
+*.iml
+
+# MacOS
+.DS_Store
