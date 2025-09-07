@@ -20,12 +20,22 @@ scene.add(directionalLight2);
 
 // Generate the fractal
 const initialSize = 1;
-const initialDepth = 4;
+const initialDepth = 7;
 const rootObject = createBroccoli(initialSize, initialDepth);
-scene.add(rootObject);
+
+// Create a pivot object to rotate around
+const pivot = new THREE.Object3D();
+const cylinderHeight = initialSize * 2.5;
+pivot.position.y = cylinderHeight;
+scene.add(pivot);
+
+// Add the broccoli to the pivot and offset it so it's centered on the pivot
+rootObject.position.y = -cylinderHeight;
+pivot.add(rootObject);
 
 // Position the camera
-camera.position.z = 5;
+camera.position.y = 4;
+camera.position.z = 10;
 
 // Variables to handle mouse interaction
 let isDragging = false;
@@ -45,8 +55,8 @@ canvas.addEventListener('mousemove', (e) => {
     y: e.clientY - previousMousePosition.y,
   };
 
-  rootObject.rotation.y += deltaMove.x * 0.01;
-  rootObject.rotation.x += deltaMove.y * 0.01;
+  pivot.rotation.y += deltaMove.x * 0.01;
+  pivot.rotation.x += deltaMove.y * 0.01;
 
   previousMousePosition = { x: e.clientX, y: e.clientY };
 });
