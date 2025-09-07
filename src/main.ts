@@ -20,7 +20,7 @@ scene.add(directionalLight2);
 
 // Generate the fractal
 const initialSize = 1;
-const initialDepth = 7;
+const initialDepth = 6;
 const rootObject = createBroccoli(initialSize, initialDepth);
 
 // Create a pivot object to rotate around
