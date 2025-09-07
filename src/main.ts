@@ -39,29 +39,50 @@ camera.position.z = 10;
 
 // Variables to handle mouse interaction
 let isDragging = false;
-let previousMousePosition = { x: 0, y: 0 };
+let previousPosition = { x: 0, y: 0 };
 const canvas = renderer.domElement;
 
+// Mouse event handlers
 canvas.addEventListener('mousedown', (e) => {
   isDragging = true;
-  previousMousePosition = { x: e.clientX, y: e.clientY };
+  previousPosition = { x: e.clientX, y: e.clientY };
 });
 
 canvas.addEventListener('mousemove', (e) => {
   if (!isDragging) return;
-
   const deltaMove = {
-    x: e.clientX - previousMousePosition.x,
-    y: e.clientY - previousMousePosition.y,
+    x: e.clientX - previousPosition.x,
+    y: e.clientY - previousPosition.y,
   };
-
   pivot.rotation.y += deltaMove.x * 0.01;
   pivot.rotation.x += deltaMove.y * 0.01;
-
-  previousMousePosition = { x: e.clientX, y: e.clientY };
+  previousPosition = { x: e.clientX, y: e.clientY };
 });
 
 canvas.addEventListener('mouseup', () => {
+  isDragging = false;
+});
+
+// Touch event handlers
+canvas.addEventListener('touchstart', (e) => {
+  if (e.touches.length === 1) {
+    isDragging = true;
+    previousPosition = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+  }
+});
+
+canvas.addEventListener('touchmove', (e) => {
+  if (!isDragging || e.touches.length !== 1) return;
+  const deltaMove = {
+    x: e.touches[0].clientX - previousPosition.x,
+    y: e.touches[0].clientY - previousPosition.y,
+  };
+  pivot.rotation.y += deltaMove.x * 0.01;
+  pivot.rotation.x += deltaMove.y * 0.01;
+  previousPosition = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+});
+
+canvas.addEventListener('touchend', () => {
   isDragging = false;
 });
 
