@@ -5,6 +5,8 @@ inspired by the structure of a Romanesco broccoli.
 The project is built with **TypeScript**, **Three.js**, and **Vite**, 
 and is automatically deployed to GitHub Pages using **GitHub Actions**.
 
+![A rendered 3D image of the broccoli fractal](docs/broccoli.png)
+
 Check out the **[live interactive demo](https://owahlen.github.io/broccoli/)** 
 to see the fractal in action!
 
